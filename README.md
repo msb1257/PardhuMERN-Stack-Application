@@ -6,6 +6,13 @@ Welcome to our open source MERN stack project! This repository serves as an educ
 
 As an open source project, we encourage anyone to work on and contribute to the project. Whether you are a DevOps engineer, a full-stack developer, or someone looking to learn more about deploying a MERN stack application, you will find opportunities to gain hands-on experience and make meaningful contributions.
 
+## LAB Details
+
+1. **LAB-1** - Virtualization
+2. **LAB-2** - Dockerfile and docker-compose
+3. **LAB-3** - DevSecOps and CI/CD
+4. **LAB-4** - Kubernetes and CI/CD
+
 ## The project uses a modern DevOps pipeline that leverages the following tools and practices:
 
 1. **Code Repository:** The project code is stored in a Git repository, providing a centralized location for version control and collaboration.
