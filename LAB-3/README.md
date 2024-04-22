@@ -1,84 +1,122 @@
-# Wanderlust - Your Ultimate Travel Blog 🌍✈️
+### In this LAB-3, we will learn about  DevOps and DevSecOps tools in one project:
 
-WanderLust is a simple MERN travel blog website ✈ This project is aimed to help people to contribute in open source, upskill in DevOps.
+### Tools Covered:
+-  Linux
+-  Git and GitHub
+-  Docker
+-  Docker-compose
+-  Jenkins CI/CD
+-  SonarQube Scan
+-  SonarQube Quality Gates
+-  Trivy 
 
-![Preview Image](https://github.com/krishnaacharyaa/wanderlust/assets/116620586/17ba9da6-225f-481d-87c0-5d5a010a9538)
+#
 
-## Setting up the project locally
+## Pre-requisites to implement this project:
 
-### Setting up the Backend
+-  AWS EC2 instance (Ubuntu) with instance type t2.large and root volume 29GB.
 
-1. **Fork and Clone the Repository**
+-  Jenkins installed <br>
+    - Reference: <b><a href="https://www.jenkins.io/doc/book/installing/linux/#long-term-support-release"><u> Jenkins installation </a></u></b>
 
-   ```bash
-   git clone https://github.com/{your-username}/wanderlust.git
-   ```
+-  Docker and docker-compose installled
+```bash
+    sudo apt-get update
+    sudo apt-get install docker.io -y
+    sudo apt-get install docker-compose -y
+```
 
-2. **Navigate to the Backend Directory**
+- Trivy installed <br>
+    - Reference: <b> <a href="https://github.com/DevMadhup/Trivy_Installation_and_implementation/blob/main/README.md"><u>Trivy Installation</a></u></b>
 
-   ```bash
-   cd backend
-   ```
+- SonarQube Server installed
+```bash
+    docker run -itd --name sonarqube-server -p 9000:9000 sonarqube:lts-community
+```
+#
+## Steps for Jenkins CI/CD:
 
-3. **Install Required Dependencies**
+1)  Access Jenkins UI and setup Jenkins
 
-   ```bash
-   npm i
-   ```
+![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/1eec417e-95ab-4497-ad31-443ecd6b999e)
 
-4. **Set up your MongoDB Database**
+#
 
-   - Open MongoDB Compass and connect MongoDB locally at `mongodb://localhost:27017`.
+2)  Plugins Installation:
 
-5. **Import sample data**
+    - Go to <b><i><u>Manage Jenkins</u></i></b>, click on <b><i><u>Plugins</u></i></b> and install all the plugins listed below, we will require for other tools integration:
 
-   > To populate the database with sample posts, you can copy the content from the `backend/data/sample_posts.json` file and insert it as a document in the `wanderlust/posts` collection in your local MongoDB database using either MongoDB Compass or `mongoimport`.
+        - SonarQube Scanner (Version2.16.1)
+        - Sonar Quality Gates (Version1.3.1)
+        - OWASP Dependency-Check (Version5.4.3)
+        - Docker (Version1.5)
+#
 
-   ```bash
-   mongoimport --db wanderlust --collection posts --file ./data/sample_posts.json --jsonArray
-   ```
+3) Go to SonarQube Server and create token
 
-6. **Configure Environment Variables**
+    - Click on <b><i><u> Administration </u></i></b> tab, then <b><i><u> Security </u></i></b>, then <b><i><u> Users </u></i></b> and create Token.
+    -  Create a webhook to notify Jenkins that Quality gates scanning is done. (We will need this step later)
 
-   ```bash
-   cp .env.sample .env
-   ```
+        - Go to SonarQube Server, then <b><i><u> Administration </u></i></b>, then <b><i><u> Configuration </u></i></b> and click on <b><i><u> Webhook </u></i></b>, add webhook in below <b>Format</b>:
+        > http://<jenkins_url>:8080/sonarqube-webhook/
+        
+        Example: 
+        
+        ```bash
+            http://34.207.58.19:8080/sonarqube-webhook/
+        ```
 
-7. **Start the Backend Server**
+        ![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/b9ef2301-b8ff-46f4-a457-6345d5e2dab6)
 
-   ```bash
-   npm start
-   ```
 
-   > You should see the following on your terminal output on successful setup.
-   >
-   > ```bash
-   > [BACKEND] Server is running on port 5000
-   > [BACKEND] Database connected: mongodb://127.0.0.1/wanderlust
-   > ```
+        ![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/08a33164-f6a6-4c5d-8a34-7091cf8a5745)
 
-### Setting up the Frontend
+#
 
-1. **Open a New Terminal**
+4) Go to Jenkins UI <b><i><u> Manage Jenkins </u></i></b>, then <b><i><u> Credentials </u></i></b> and add SonarQube Credentials.
 
-   ```bash
-   cd frontend
-   ```
+![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/f6db72ec-7d8c-4f4c-ae7a-55d99dd20ce9)
 
-2. **Install Dependencies**
+#
 
-   ```bash
-   npm i
-   ```
+5) Now, It's time to integrate SonarQube Server with Jenkins, go to <b><i><u> Manage Jenkins </u></i></b>, then <b><i><u> System </u></i></b> and look for <b><i><u> SonarQube Servers </u></i></b> and add SonarQube.
 
-3. **Configure Environment Variables**
+![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/54849cb2-fe56-4acd-972d-3057a0eb3deb)
 
-   ```bash
-   cp .env.sample .env.local
-   ```
+#
 
-4. **Launch the Development Server**
+6) Go to <b><i><u> Manage Jenkins </u></i></b>, then <b><i><u> tools </u></i></b>, look for <b><i><u> SonarQube Scanner installations </u></i></b> and add SonarQube Scanner.
 
-   ```bash
-   npm run dev
-   ```
+> Note: Add name as ```Sonar```
+
+![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/1fe926f6-a844-42d4-bce4-62193dde6640)
+
+7) Integrate OWASP with Jenkins, go to <b><i><u> Manage Jenkins </u></i></b>, then <b><i> tools </i></b>, look for <b><i><u>Dependency-Check installations</u></i></b> and add Dependency-Check.
+
+> Note: Add name as ```dc```
+
+![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/14516995-0c96-4110-bb96-97a37a9fe57d)
+
+#
+
+8) For trivy, we have already installed it, in pre-reuisites.
+
+![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/0fcd1620-bd64-4286-bc13-f6652d4527c6)
+
+#
+
+9) Now, It's time to create a CI/CD pipeline in Jenkins:
+    -  Click on <b><i><u>New Item</u></i></b> and give it a name and select <b><i><u>Pipeline</u></i></b>.
+    -  Select <b><i><u>GitHub Project</u></i></b> and paste your GitHub repository link.
+    -  Scroll down and in <b><i><u>Pipeline</u></i></b> section select <b><i><u>Pipeline script from SCM</u></i></b>, because our Jenkinsfile is present on GitHub.
+
+    ![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/39af1b22-28aa-4e36-b98c-0e7f120b5fbf)
+
+    ![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/b7153556-f847-40ee-9a98-ff3609930abd)
+#
+
+10) At last run the pipeline and after sometime your code is deployed using DevSecOps.
+
+
+
+
