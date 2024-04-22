@@ -21,6 +21,9 @@ https://nodejs.org/en/download/package-manager
 ```bash
 sudo reboot
 ```
+
+## Setting up the Backend with DB
+
 7. Install mongodb database
 ```bash
 https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
