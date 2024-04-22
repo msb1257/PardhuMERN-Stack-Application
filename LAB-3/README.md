@@ -1,4 +1,4 @@
-### In this LAB-3, we will learn about  DevOps and DevSecOps tools in one project:
+### In this LAB-3, we will discuss DevOps and DevSecOps tools:
 
 ### Tools Covered:
 -  Linux
