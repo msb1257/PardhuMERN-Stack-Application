@@ -1,17 +1,18 @@
-# Wanderlust - Your Ultimate Travel Blog 🌍✈️
+## MERN Stack Project with DevOps Principles
 
-WanderLust is a simple MERN travel blog website ✈ This project is aimed to help people to contribute in open source, upskill in DevOps.
+1. Welcome to our open source **MERN** stack project! This repository serves as an educational resource for developers who want to learn how to deploy a three-tier application to **PRODUCTION** using DevOps principles. The project leverages a modern technology stack and architecture, consisting of Next.js for the frontend, Node.js for the backend, and MongoDB for the database.
 
-![Preview Image](https://github.com/krishnaacharyaa/wanderlust/assets/116620586/17ba9da6-225f-481d-87c0-5d5a010a9538)
+2. As an open source project, we encourage anyone to work on and contribute to the project. Whether you are a DevOps engineer, a full-stack developer, or someone looking to learn more about deploying a MERN stack application, you will find opportunities to gain hands-on experience and make meaningful contributions.
 
-## Setting up the project locally
+3. The project uses a modern DevOps pipeline that leverages the following tools and practices:
+Code Repository: The project code is stored in a Git repository, providing a centralized location for version control and collaboration.
 
 ### Setting up the Backend
 
 1. **Fork and Clone the Repository**
 
    ```bash
-   git clone https://github.com/{your-username}/wanderlust.git
+   git clone https://github.com/DevOps-Playbbok/Capstone-Project-LAB.git
    ```
 
 2. **Navigate to the Backend Directory**
