@@ -39,21 +39,28 @@
    sudo cat /var/lib/jenkins/secrets/initialAdminPassword
    ```
 -  Docker and docker-compose installled
-```bash
+   ```bash
     sudo apt-get update
     sudo apt-get install docker.io -y
     sudo apt-get install docker-compose -y
     sudo usermod -aG docker $USER
     sudo reboot
-```
+   ```
 
-- Trivy installed <br>
-    - Reference: <b> <a href="https://github.com/DevMadhup/Trivy_Installation_and_implementation/blob/main/README.md"><u>Trivy Installation</a></u></b>
+-  Trivy installation
+   ```bash
+   sudo apt-get install wget apt-transport-https gnupg lsb-release
+   wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+   echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a 
+   /etc/apt/sources.list.d/trivy.list
+   sudo apt-get update
+   sudo apt-get install trivy
+   ```
 
 - SonarQube Server installed
-```bash
+   ```bash
     docker run -itd --name sonarqube-server -p 9000:9000 sonarqube:lts-community
-```
+   ```
 #
 ## Steps for Jenkins CI/CD:
 
