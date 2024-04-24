@@ -16,14 +16,35 @@
 
 -  AWS EC2 instance (Ubuntu) with instance type t2.large and root volume 29GB.
 
--  Jenkins installed <br>
-    - Reference: <b><a href="https://www.jenkins.io/doc/book/installing/linux/#long-term-support-release"><u> Jenkins installation </a></u></b>
-
+-  Installation of JAVA
+   ```bash
+   sudo apt update
+   sudo apt install fontconfig openjdk-17-jre
+   java -version
+   ```
+   
+-  Installation of Jenkins
+   ```bash
+   sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+   https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+   echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+   https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+   /etc/apt/sources.list.d/jenkins.list > /dev/null
+   sudo apt-get update
+   sudo apt-get install jenkins
+   ```
+-  Setup Jenkins
+   ```bash
+   Public-IP:8080 (Jenkins running)
+   sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+   ```
 -  Docker and docker-compose installled
 ```bash
     sudo apt-get update
     sudo apt-get install docker.io -y
     sudo apt-get install docker-compose -y
+    sudo usermod -aG docker $USER
+    sudo reboot
 ```
 
 - Trivy installed <br>
