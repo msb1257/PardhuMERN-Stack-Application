@@ -143,6 +143,8 @@
     ![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/b7153556-f847-40ee-9a98-ff3609930abd)
 #
 
+> Since our repository is private we need to create credentials for our repo. Click on Add Credentials --> Jenkins --> username as github usernmae and password as --> Personal access token
+
 10) At last run the pipeline and after sometime your code is deployed using DevSecOps.
 
 
