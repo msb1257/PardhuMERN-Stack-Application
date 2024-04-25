@@ -304,7 +304,7 @@ docker compose up -d --build
 > If you are building the image make sure to import the data
 > Check developer tools console log to identify the API calls and errors
 > Check the backend logs if it is connecting to mongo
-## In this LAB-3, we will discuss DevOps and DevSecOps tools:
+## LAB-3: DevOps and DevSecOps tools:
 
 ### Tools Covered:
 -  Linux
