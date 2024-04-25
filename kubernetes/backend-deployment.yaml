@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: madhupdevops/backend-wanderlust:v2
+          image: nishant234/backend:latest
           env:
             - name: MONGODB_URI
               value: mongodb://mongo-service:27017/wanderlust

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: madhupdevops/frontend-wanderlust:v2
+          image: nishant234/frontend
           env:
             - name: VITE_API_PATH
               value: "http://backend:5000"
