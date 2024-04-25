@@ -438,7 +438,7 @@ docker compose up -d --build
 
 > Since our repository is private we need to create credentials for our repo. Click on Add Credentials --> Jenkins --> username as github usernmae and password as --> Personal access token
 
-9) Make sure to change the .env.docker file for frontend so it can talk to backend container
+9) Make sure to change the .env.docker file for frontend so it can talk to backend container by updating the IP Address 
 
 10) At last run the pipeline and after sometime your code is deployed using DevSecOps.
 
