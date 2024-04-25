@@ -6,7 +6,6 @@ As an open source project, we encourage anyone to work on and contribute to the 
 1. **LAB-1** - Virtualization
 2. **LAB-2** - Dockerfile and docker-compose
 3. **LAB-3** - DevSecOps and CI/CD
-4. **LAB-4** - Kubernetes and CI/CD
 ## The project uses a modern DevOps pipeline that leverages the following tools and practices:
 1. **Code Repository:** The project code is stored in a Git repository, providing a centralized location for version control and collaboration.
 2. **Jenkins CI/CD:** Jenkins is used for continuous integration and continuous deployment (CI/CD). It automates the build, test, and deployment processes based on code changes and triggers.
