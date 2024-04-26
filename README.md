@@ -16,7 +16,7 @@ As an open source project, we encourage anyone to work on and contribute to the 
 ### Setting up the Backend
 1. **Fork and Clone the Repository**
    ```bash
-   git clone https://github.com/DevOps-Playbbok/Capstone-Project-LAB.git
+   git clone https://github.com/amigo-nishant/Capstone-Project-LAB.git
    ```
 2. **Navigate to the Backend Directory**
    ```bash
