@@ -133,19 +133,15 @@ cd frontend
 ```bash
 npm i
 ```
-3. To start your frontend service with EC2 servive host
-```bash
-npm run dev -- --host
-```
-4. vim .env.sample
+3. vim .env.sample
 ```bash
 change localhost:5000 --> public-IP:5000
 ```
-5. Configure Environment Variables
+4. Configure Environment Variables
 ```bash
 cp .env.sample .env.local
 ```
-6. Restart your service 
+5. Start your service 
 ```bash
 npm run dev -- --host
 ```
