@@ -78,7 +78,7 @@ sudo apt-get update -y
 ```
 4. Since it's a private repo, we need a Personal access token to clone the repo and then clone the git repository
 ```bash
-git clone https://github.com/amigo-nishant/Capstone-project-clone-PROD.git
+git clone https://github.com/amigo-nishant/Capstone-Project-LAB.git
 ```
 5. We need to install npm and nodejs for our project
 ```bash
