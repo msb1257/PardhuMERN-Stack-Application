@@ -1,7 +1,3 @@
-# Default values for my-chart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 backend:
   image: nishant234/backend:latest
   replicas: 1
