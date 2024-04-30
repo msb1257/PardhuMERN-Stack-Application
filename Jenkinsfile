@@ -31,13 +31,6 @@ pipeline{
                     }
                 }
         }
-        
-        stage("Trivy filesystem Scan"){
-            steps{
-                sh "trivy fs --format table -o trivy-fs-report.html ."
-            }
-        }
-        
         stage("Code Deploy: Docker-compose"){
             steps{    
                
