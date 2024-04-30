@@ -15,26 +15,10 @@ pipeline{
                  )
             }
         }
-        
-        stage("SonarQube Code Analysis"){
-            steps{
-                withSonarQubeEnv("Sonar"){
-                    sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=wanderlust -Dsonar.projectKey=wanderlust"
-                }
-            }
-        }
-        
-        stage("SonarQube Code Quality Gates"){
-                steps{
-                    timeout(time: 2, unit: "MINUTES"){
-                        waitForQualityGate abortPipeline: false
-                    }
-                }
-        }
         stage("Code Deploy: Docker-compose"){
             steps{    
                
-                sh "docker-compose up -d"
+                sh "kubectl get pods"
             }
         }
     }
