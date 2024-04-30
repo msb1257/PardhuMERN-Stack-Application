@@ -18,7 +18,7 @@ pipeline{
         stage("Code Deploy: Docker-compose"){
             steps{    
                
-                sh "kubectl get pods"
+                sh "docker ps"
             }
         }
     }
