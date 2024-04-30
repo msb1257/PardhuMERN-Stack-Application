@@ -376,6 +376,7 @@ docker compose up -d --build
         - SonarQube Scanner (Version2.16.1)
         - Sonar Quality Gates (Version1.3.1)
         - Docker (Version1.5)
+        - Kubernetes
 #
 
 3) Go to SonarQube Server and create token
@@ -438,3 +439,52 @@ docker compose up -d --build
 
 10) At last run the pipeline and after sometime your code is deployed using DevSecOps.
 
+# Setup Jenkins job for DEV & PROD deployment 
+
+Create a namespace for jenkins deployment 
+ ```bash
+kubectl create namespace jenkins
+kubectl get ns
+```
+
+Create a service account for jenkins in jenkins namespace
+ ```bash
+kubectl create sa jenkins -n jenkins
+```
+
+Create a token for authentication and save the token somewhere in notepad
+ ```bash
+kubectl create token jenkins -n jenkins --duration=8760h
+```
+create a role binding for your kubernetes cluster
+kubectl create rolebinding jenkins-admin-binding --clusterrole=admin --serviceaccount=jenkins:jenkins --namespace=jenkins
+
+### Stepts to setup kubernetes cloud in Jenkins
+- Go to Jenkins --> Manage Jenkins --> Clouds --> kubernetes
+- kubernetes URL --> You can get this by saying <kubectl config view> and then get the server URL - eg:  server: https://192.168.49.2:8443
+- Disable https certificate check
+- Namespace - jenkins
+- Credentials - select secret text - copy the token
+-  Test connection - Successfull
+-  Checkmark the websocket box
+-  Enter jenkins URL and then save.
+
+### Configure the Jenkins Job 
+- create a jenkins job "DEV deployment"
+- select pipeline
+- Pipeline -> SCM --> credentials --> Username and PAT
+- ALso before triggering the build check make sure to give jenkins and docker permission 
+ ```bash
+sudo usermod -aG docker jenkins
+sudo systemctl restart docker
+sudo systemctl restart jenkins
+docker ps -a
+docker start <minikube-container-ID>
+docker start <sonarqube-container-ID>
+```
+ - Setup password --> sudo passwd jenkins --> change "admin123"
+ - sudo usermod -a -G sudo jenkins
+ - sudo su - jenkins
+ - mkdir -p $HOME/.kube
+ - sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+ - sudo chown $(id -u):$(id -g) $HOME/.kube/config
