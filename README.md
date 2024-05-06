@@ -2,17 +2,7 @@
 ## Introduction
 Welcome to our open source MERN stack project! This repository serves as an educational resource for developers who want to learn how to deploy a three-tier application to **PRODUCTION** using DevOps principles. The project leverages a modern technology stack and architecture, consisting of Next.js for the frontend, Node.js for the backend, and MongoDB for the database. 
 As an open source project, we encourage anyone to work on and contribute to the project. Whether you are a DevOps engineer, a full-stack developer, or someone looking to learn more about deploying a MERN stack application, you will find opportunities to gain hands-on experience and make meaningful contributions.
-## LAB Details
-1. **LAB-1** - Virtualization
-2. **LAB-2** - Dockerfile and docker-compose
-3. **LAB-3** - DevSecOps and CI/CD
-## The project uses a modern DevOps pipeline that leverages the following tools and practices:
-1. **Code Repository:** The project code is stored in a Git repository, providing a centralized location for version control and collaboration.
-2. **Jenkins CI/CD:** Jenkins is used for continuous integration and continuous deployment (CI/CD). It automates the build, test, and deployment processes based on code changes and triggers.
-3. **Docker & Docker Compose:** Docker containerizes the frontend and backend services, providing consistency across environments. Docker Compose simplifies local development by orchestrating Docker containers.
-4. **Kubernetes:** Kubernetes manages the deployment, scaling, and maintenance of Docker containers in production environments, ensuring high availability and reliability.
-5. **Ansible:** Ansible automates application and infrastructure updates, streamlining configurations and ensuring consistency across the deployment pipeline.
-6. **Grafana & Prometheus:** Grafana and Prometheus work together to monitor the application and infrastructure. Prometheus collects metrics, and Grafana visualizes them, providing insights into the health and performance of the application.
+
 ### Setting up the Backend
 1. **Fork and Clone the Repository**
    ```bash
