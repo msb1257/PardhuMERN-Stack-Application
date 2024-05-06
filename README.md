@@ -379,7 +379,7 @@ helm install grafana grafana/grafana
 ```
 12. Expose the Grafana service to access Grafana using the browser.
 ```bash
-kubectl expose service grafana — type=NodePort — target-port=3000 — name=grafana-ext
+kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-ext
 ```
 13. Test the service for prometheus-server-ext
 ```bash
