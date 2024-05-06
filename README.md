@@ -311,7 +311,7 @@ kubectl create -f kubernetes/
 kubectl delete -f kubernetes/
 ```
 ## PROD Deployment via custom Helm Charts
-1. Navigate to the directoy having helm configs
+1. Install minikube cluster on a t2.large instance and navigate to the directoy having helm configs
 ```bash
 cd helm
 ```
@@ -386,3 +386,8 @@ kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana
 kubectl get svc
 ```
 14. Navigate to browser --> localhost:NodePort
+15. Get your 'admin' user password by running:
+```bash
+kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+```
+16. Setup datasorce in Grafana dashboard --> Go to Home --> Add Datasource --> Prometheus --> Go to dashboards and import dashboard ID - 3662
