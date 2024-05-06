@@ -291,7 +291,7 @@ docker compose up -d --build
 > Check developer tools console log to identify the API calls and errors
 > Check the backend logs if it is connecting to mongo
 
-## LAB-3: PROD Deployment via custom kubernetes manifest files
+## DEV Deployment via custom kubernetes manifest files
 1. Check the cluster configs
 ```bash
 kubectl config get-contexts
@@ -310,24 +310,79 @@ kubectl create -f kubernetes/
 ```bash
 kubectl delete -f kubernetes/
 ```
-## LAB-3: PROD Deployment via custom Helm Charts
+## PROD Deployment via custom Helm Charts
 1. Navigate to the directoy having helm configs
 ```bash
 cd helm
 ```
-2. Deploy the helm chart
+2. Before deployment check the configs using dry-run 
 ```bash
-helm upgrade --install wanderlast .
+helm upgrade --install wanderlast . --dry-run --debug
 ```
-3. Check the deployment
+3. Deploy the helm chart
+```bash
+helm upgrade --install wanderlast . --dry-run --debug
+```
+4. Check the deployment
 ```bash
 helm ls
 ```
-4. Check the deployment status
+5. Check the deployment status
 ```bash
 kubectl get all
 ```
-5. Delete the deployment
+6. Delete the deployment
 ```bash
 helm uninstall wanderlast .
 ```
+## Observability Setup and Monitoring
+1. Add the prometheus community maintained helm chart
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+```
+2. helm repo update
+```bash
+helm repo update
+```
+3. Test prometheus using dry-run and validate the chart configs
+```bash
+helm install prometheus prometheus-community/prometheus --dry-run --debug
+```
+4. Deploy prometheus after validation
+```bash
+helm install prometheus prometheus-community/prometheus
+```
+5. Expose the prometheus service to access prometheus-server using the browser.
+```bash
+kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-ext
+```
+6. Test the service for prometheus-server-ext
+```bash
+kubectl get svc
+```
+7. Navigate to browser --> localhost:NodePort
+8. Add the Grafana community maintained helm chart
+```bash
+helm repo add grafana https://grafana.github.io/helm-charts
+```
+9. Update the repo
+```bash
+helm repo update
+```
+10. Test Grafana using dry-run and validate the chart configs
+```bash
+helm install grafana grafana/grafana --dry-run --debug
+```
+11. Deploy Grafana  after validation
+```bash
+helm install grafana grafana/grafana
+```
+12. Expose the Grafana service to access Grafana using the browser.
+```bash
+kubectl expose service grafana — type=NodePort — target-port=3000 — name=grafana-ext
+```
+13. Test the service for prometheus-server-ext
+```bash
+kubectl get svc
+```
+14. Navigate to browser --> localhost:NodePort
