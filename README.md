@@ -367,3 +367,17 @@ kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-passwor
     3.  Now the Connection URL should be --> http://prometheus-server-cluster-IP:Port
     4.  Once Datasorce is connected successfully we can create Dashboard to visualize the charts
     5.  Go to dashboards and import dashboard ID - 3662
+    
+### To Bring down all the services after the lab
+1. Bring down Application pods
+```bash
+helm uninstall wanderlast .
+```
+2. Scale down all grafana pods and services
+```bash
+helm uninstall grafana grafana/grafana
+```
+3. Lastly scale down all prometheus pods services
+```bash
+helm uninstall prometheus prometheus-community/prometheus
+```
