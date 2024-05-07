@@ -356,4 +356,14 @@ kubectl get svc
 ```bash
 kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
-16. Setup datasorce in Grafana dashboard --> Go to Home --> Add Datasource --> Prometheus --> Go to dashboards and import dashboard ID - 3662
+16. Setup datasorce in Grafana dashboard
+    1. Go to Home --> Add Datasource --> Prometheus
+    2. In Datasources we need the connection string for our prometheus-server
+    ```bash
+    kubectl get svc prometheus-server
+    NAME                TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+    prometheus-server   ClusterIP   10.98.12.207   <none>        80/TCP    19m
+    ```
+    3.  Now the Connection URL should be --> http://prometheus-server-cluster-IP:Port
+    4.  Once Datasorce is connected successfully we can create Dashboard to visualize the charts
+    5.  Go to dashboards and import dashboard ID - 3662
