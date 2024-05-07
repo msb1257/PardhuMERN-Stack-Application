@@ -287,7 +287,7 @@ helm upgrade --install wanderlast . --dry-run --debug
 ```
 3. Deploy the helm chart
 ```bash
-helm upgrade --install wanderlast . --dry-run --debug
+helm upgrade --install wanderlast .
 ```
 4. Check the deployment
 ```bash
