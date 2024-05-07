@@ -260,24 +260,13 @@ docker compose down
 ## DEV Deployment via custom kubernetes manifest files
 1. Check the cluster configs and install minikube cluster using the shell script
 ```bash
-vi minnikibe.sh
-chmod +x minikube.sh
-./minikube.sh
+kubectl config get-contexts
 ```
 2. Be on the project root directory
 ```bash
 ls
 Jenkinsfile		README.md		docker-compose.yml	helm			package-lock.json
 LICENSE			backend			frontend		kubernetes		package.json 
-```
-3. Docker login, tag and push
-```bash
-docker login
-docker images
-docker tag backend <amigosnishant>/backend
-docker push <amigosnishant>/backend
-docker tag backend <amigosnishant>/frontend
-docker push <amigosnishant>/frontend
 ```
 3. Deploy the files
 ```bash
