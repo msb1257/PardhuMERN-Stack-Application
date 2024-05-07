@@ -137,7 +137,7 @@ npm run dev -- --host
 ```
 > Now you can navigate to your frontend --> public-IP:5173
 > Frontend / Backend / MongoDB should be connected and deployed on AWS using Virtualization
-## LAB-2: Understanding Dockerization and Deployment with Docker Compose
+## LAB-2: Understanding Dockerization and Deployment with Docker Compose on EC2 instance
 This lab focuses on Dockerization, where you will learn how to containerize applications using Docker and deploy them using Docker Compose. You'll understand the benefits of containerization and how to manage multi-container applications efficiently.
 
 ### Setting up the Frontend
@@ -257,7 +257,7 @@ docker compose down
 > Check developer tools console log to identify the API calls and errors
 > Check the backend logs if it is connecting to mongo
 
-## DEV Deployment via custom kubernetes manifest files
+## Deployment via custom kubernetes manifest files (docker-desktop)
 1. Check the cluster configs and install minikube cluster using the shell script
 ```bash
 kubectl config get-contexts
