@@ -246,6 +246,10 @@ docker ps
 docker exec -it <mongo-container-ID> /bin/bash
 docker exec -it mongo mongoimport --db wanderlust --collection posts --file ./data/sample_posts.json --jsonArray
 ```
+Stop all the services
+```bash
+docker compose down
+```
 
 ### Debugging Notes
 > Check frontend .env.sample file and update the connection URL
@@ -254,9 +258,11 @@ docker exec -it mongo mongoimport --db wanderlust --collection posts --file ./da
 > Check the backend logs if it is connecting to mongo
 
 ## DEV Deployment via custom kubernetes manifest files
-1. Check the cluster configs
+1. Check the cluster configs and install minikube cluster using the shell script
 ```bash
-kubectl config get-contexts
+vi minnikibe.sh
+chmod +x minikube.sh
+./minikube.sh
 ```
 2. Be on the project root directory
 ```bash
@@ -264,6 +270,14 @@ ls
 Jenkinsfile		README.md		docker-compose.yml	helm			package-lock.json
 LICENSE			backend			frontend		kubernetes		package.json 
 ```
+3. Docker login, tag and push
+```bash
+docker login
+docker images
+docker tag backend <amigosnishant>/backend
+docker push <amigosnishant>/backend
+docker tag backend <amigosnishant>/frontend
+docker push <amigosnishant>/frontend
 3. Deploy the files
 ```bash
 kubectl create -f kubernetes/
