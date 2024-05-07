@@ -235,50 +235,11 @@ docker rm -f <all-containers>
 ```
 > But containers are isolated, we have to create a network or we can use docker-compose so that we can have all the three containers in one single stack and communicate with each other.
 ### docker-compose 
-
-```bash
-version: "3.8"
-services:
-  mongodb:
-    container_name: mongo
-    image: mongo:latest
-    volumes:
-      - ./backend/data:/data
-    ports:
-      - "27017:27017"
-
-  backend:
-    container_name: backend
-    build: ./backend
-    env_file:
-      - ./backend/.env.sample
-    ports:
-      - "5000:5000"
-    depends_on:
-      - mongodb
-
-  frontend:
-    container_name: frontend
-    build: ./frontend
-    env_file:
-      - ./backend/.env.sample
-    ports:
-      - "5173:5173"
-
-volumes:
-  data:
-```
 Check the mongo container 
 ```bash
 docker ps
 docker exec -it <mongo-container-ID> /bin/bash
 docker exec -it mongo mongoimport --db wanderlust --collection posts --file ./data/sample_posts.json --jsonArray
-```
-Add connection string between frontend / backend and mongo 
-```bash
-cd /backend
-vim .env.sample
-CORS_ORIGIN="http://<instance-IP>:5173"
 ```
 Run the command to start all the services
 ```bash
