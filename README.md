@@ -235,15 +235,16 @@ docker rm -f <all-containers>
 ```
 > But containers are isolated, we have to create a network or we can use docker-compose so that we can have all the three containers in one single stack and communicate with each other.
 ### docker-compose 
-Check the mongo container 
+
+Run the command to start all the services
+```bash
+docker compose up -d --build
+```
+If you want to import some data  
 ```bash
 docker ps
 docker exec -it <mongo-container-ID> /bin/bash
 docker exec -it mongo mongoimport --db wanderlust --collection posts --file ./data/sample_posts.json --jsonArray
-```
-Run the command to start all the services
-```bash
-docker compose up -d --build
 ```
 
 ### Debugging Notes
