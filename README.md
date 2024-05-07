@@ -278,6 +278,7 @@ docker tag backend <amigosnishant>/backend
 docker push <amigosnishant>/backend
 docker tag backend <amigosnishant>/frontend
 docker push <amigosnishant>/frontend
+```
 3. Deploy the files
 ```bash
 kubectl create -f kubernetes/
