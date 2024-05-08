@@ -1,12 +1,12 @@
 backend:
-  image: nishant234/backend:latest
+  image: amigosnishant/backend:latest
   replicas: 1
   port: 5000
   env:
     MONGODB_URI: "mongodb://mongo-service:27017/wanderlust"
 
 frontend:
-  image: nishant234/frontend
+  image: amigosnishant/frontend
   replicas: 1
   port: 5173
   nodePort: 30001
