@@ -132,34 +132,6 @@ npm run dev -- --host
 ## LAB-2: Understanding Dockerization and Deployment with Docker Compose on EC2 instance
 This lab focuses on Dockerization, where you will learn how to containerize applications using Docker and deploy them using Docker Compose. You'll understand the benefits of containerization and how to manage multi-container applications efficiently.
 
-### Setting up the Frontend
-
-1. Open a New Terminal
-```bash
-cd frontend
-```
-2. Install Dependencies
-```bash
-npm i
-```
-3. To start your frontend service with EC2 servive host
-```bash
-npm run dev -- --host
-```
-4. vim .env.sample
-```bash
-change localhost:5000 --> public-IP:5000
-```
-5. Configure Environment Variables
-```bash
-cp .env.sample .env.local
-```
-6. Restart your service 
-```bash
-npm run dev -- --host
-```
-> Now you can navigate to your frontend --> public-IP:5173
-> Frontend / Backend / MongoDB should be connected and deployed on AWS using Virtualization
 ### Setup Dockerfile for our backend 
 
 > Install Docker -- https://docs.docker.com/engine/install/ubuntu/
