@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: nishant234/frontend
+          image: amigosnishant/frontend:latest
           env:
             - name: VITE_API_PATH
               value: "http://backend:5000"
