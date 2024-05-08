@@ -221,7 +221,7 @@ docker compose down
 > If you are building the image make sure to import the data
 > Check developer tools console log to identify the API calls and errors
 > Check the backend logs if it is connecting to mongo
-## Deployment via custom kubernetes manifest files (docker-desktop)
+## Deployment via custom kubernetes manifest files 
 1. Check the cluster configs and install minikube cluster using the shell script
 ```bash
 kubectl config get-contexts
