@@ -15,10 +15,10 @@ pipeline{
                  )
             }
         }
-        stage("Code Deploy: Docker-compose"){
+        stage("Code Deploy: DEV testing"){
             steps{    
                
-                sh "docker ps"
+                sh "docker-compose down && docker-compose up -d"
             }
         }
     }
