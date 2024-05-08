@@ -144,7 +144,7 @@ FROM node:21
 WORKDIR /app
 COPY . .
 RUN npm i
-COPY .env.sample .env
+COPY .env.docker .env
 EXPOSE 5000
 CMD ["npm", "start"]
 ```
@@ -177,11 +177,11 @@ FROM node:21
 WORKDIR /app
 COPY . .
 RUN npm i
-COPY .env.sample .env.local
+COPY .env.docker .env.local
 EXPOSE 5173
 CMD ["npm", "run", "dev", "--", "--host"]
 ```
-2. vim .env.sample
+2. vim .env.docker
 ```bash
 change localhost:5000 --> public-IP:5000
 ```
@@ -221,7 +221,6 @@ docker compose down
 > If you are building the image make sure to import the data
 > Check developer tools console log to identify the API calls and errors
 > Check the backend logs if it is connecting to mongo
-
 ## Deployment via custom kubernetes manifest files (docker-desktop)
 1. Check the cluster configs and install minikube cluster using the shell script
 ```bash
@@ -237,7 +236,28 @@ LICENSE			backend			frontend		kubernetes		package.json
 ```bash
 kubectl create -f kubernetes/
 ```
-4. Delete the deployment configs
+4. Check the configs
+```bash
+kubectl get all
+```
+5. Get the URL for the service running in minikube VM
+```bash
+minikube service frontend --url
+```
+6. Test the app locally on minikube VM
+```bash
+curl <URL>
+```
+7. Now to test the application outside the cluster via port-forwarding
+```bash
+kubectl get svc
+kubectl port-forward svc/frontend NodePort-port:5173 --address 0.0.0.0 &
+```
+8. Now to test on browser 
+```bash
+http:PublicIP:NodePort
+```
+9. Delete the deployment configs
 ```bash
 kubectl delete -f kubernetes/
 ```
@@ -262,7 +282,24 @@ helm ls
 ```bash
 kubectl get all
 ```
-6. Delete the deployment
+6. Get the URL for the service running in minikube VM
+```bash
+minikube service frontend --url
+```
+7. Test the app locally on minikube VM
+```bash
+curl <URL>
+```
+8. Now to test the application outside the cluster via port-forwarding
+```bash
+kubectl get svc
+kubectl port-forward svc/frontend NodePort-port:5173 --address 0.0.0.0 &
+```
+9. Now to test on browser 
+```bash
+http://PublicIP:NodePort
+```
+10. Delete the deployment
 ```bash
 helm uninstall wanderlast .
 ```
