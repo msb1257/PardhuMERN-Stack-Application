@@ -134,10 +134,11 @@ This lab focuses on Dockerization, where you will learn how to containerize appl
 
 ### Setup Dockerfile for our backend 
 
-> Install Docker -- https://docs.docker.com/engine/install/ubuntu/
-> Add user to the docker group - sudo usermod -aG docker $USER [ exit and ssh back to to apply the changes. This step is important as it refreshes your session and grants your user the new group permissions]
+1. Install Docker -- https://docs.docker.com/engine/install/ubuntu/
+2. Add user to the docker group - sudo usermod -aG docker $USER [ exit and ssh back to to apply the changes. This step is important as it refreshes your session and grants your user the new group permissions]
+3. **NOTE** If you are triggering the shell script to provision the cluster then no need to install docker manually
  
-1. Create a Dockerfile for your Backend [Reference --> README.md file for Backend]
+4. Create a Dockerfile for your Backend [Reference --> README.md file for Backend]
 ```bash
 FROM node:21
 WORKDIR /app
@@ -147,24 +148,24 @@ COPY .env.sample .env
 EXPOSE 5000
 CMD ["npm", "start"]
 ```
-2. Now from the Dockerfile let us build an image
+5. Now from the Dockerfile let us build an image
 ```bash
 docker build -t backend .
 ```
-3. We also need mongodb database for our backend service so let's build a mongo container
+6. We also need mongodb database for our backend service so let's build a mongo container
 ```bash
 docker run -d -p 27017:27017 --name mongo mongo:latest
 ```
-4. Check the status of docker containers
+7. Check the status of docker containers
 ```bash
 docker ps
 ```
-5. To validate mongo db is running inside the container
+8. To validate mongo db is running inside the container
 ```bash
 docker exec -it <container-id> /bin/bash
 mongosh
 ```
-6. Run the backend container
+9. Run the backend container
 ```bash
 docker run -d -p 5000:5000 --name backend backend:latest
 ```
