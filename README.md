@@ -327,8 +327,9 @@ kubectl expose service prometheus-server --type=NodePort --target-port=9090 --na
 6. Test the service for prometheus-server-ext
 ```bash
 kubectl get svc
+kubectl port-forward svc/prometheus-server-ext NodePort:80 --address 0.0.0.0 &
 ```
-7. Navigate to browser --> localhost:NodePort
+7. Navigate to browser --> http:PublicIP:NodePort
 8. Add the Grafana community maintained helm chart
 ```bash
 helm repo add grafana https://grafana.github.io/helm-charts
@@ -349,11 +350,12 @@ helm install grafana grafana/grafana
 ```bash
 kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-ext
 ```
-13. Test the service for prometheus-server-ext
+13. Test the service for grafana-ext
 ```bash
 kubectl get svc
+kubectl port-forward svc/grafana-ext NodePort:80 --address 0.0.0.0 &
 ```
-14. Navigate to browser --> localhost:NodePort
+14. Navigate to browser --> http://PublicIP:NodePort
 15. Get your 'admin' user password by running:
 ```bash
 kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
@@ -366,7 +368,7 @@ kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-passwor
     NAME                TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
     prometheus-server   ClusterIP   10.98.12.207   <none>        80/TCP    19m
     ```
-    3.  Now the Connection URL should be --> http://prometheus-server-cluster-IP:Port
+    3.  Now the Connection URL should be --> http://prometheus-server-cluster-IP:Port --> Eg: http://10.98.12.207:80
     4.  Once Datasorce is connected successfully we can create Dashboard to visualize the charts
     5.  Go to dashboards and import dashboard ID - 3662
     
