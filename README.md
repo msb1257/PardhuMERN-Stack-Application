@@ -70,14 +70,6 @@ sudo apt-get update -y
 ```bash
 git clone https://github.com/amigo-nishant/Capstone-Project-LAB.git
 ```
-5. We need to install npm and nodejs for our project
-```bash
-https://nodejs.org/en/download/package-manager
-```
-6. If it says nvm not found, reboot your instance and you've to ssh again
-```bash
-sudo reboot
-```
 
 ## Setting up the Backend with DB
 
