@@ -18,7 +18,7 @@ pipeline{
         stage("Code Deploy: DEV testing"){
             steps{    
                
-                sh "docker-compose up -d"
+                sh "docker compose up -d"
             }
         }
     }
