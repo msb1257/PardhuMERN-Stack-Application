@@ -1,11 +1,11 @@
 pipeline{
     agent any
-    environment{
-        SONAR_HOME= tool "Sonar"
-    }
-    stages{ 
+    // environment{
+    //    SONAR_HOME= tool "Sonar"
+    //}
+    //stages{ 
         stage("Code Checkout"){
-            steps{
+         steps{
               git(
                  url: "https://github.com/DevOps-Playbbok/Capstone-Project-LAB.git",
                  branch: "main",
