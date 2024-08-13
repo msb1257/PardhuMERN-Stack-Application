@@ -1,8 +1,8 @@
 pipeline{
     agent any
-    // environment{
-    //    SONAR_HOME= tool "Sonar"
-    //}
+      environment{
+        SONAR_HOME= tool "Sonar"
+    }
     stages{ 
         stage("Code Checkout"){
          steps{
