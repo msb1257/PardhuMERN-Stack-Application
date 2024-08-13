@@ -3,7 +3,7 @@ pipeline{
     // environment{
     //    SONAR_HOME= tool "Sonar"
     //}
-    //stages{ 
+    stages{ 
         stage("Code Checkout"){
          steps{
               git(
