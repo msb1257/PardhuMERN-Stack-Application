@@ -39,6 +39,8 @@ pipeline {
             steps{
                 sh "helm ls"
                 sh "kubectl get nodes"
+                sh "helm upgrade --install wanderlast . --dry-run --debug"
+                sh "helm upgrade --install wanderlast ."
             }
         }
     }
