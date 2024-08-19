@@ -40,8 +40,8 @@ pipeline {
                 sh "helm ls"
                 sh "kubectl get nodes"
                 sh "cd Helm && pwd && ls -alh"
-                // sh "helm upgrade --install wanderlast . --dry-run --debug"
-                // sh "helm upgrade --install wanderlast ."
+                sh "helm upgrade --install wanderlast . --dry-run --debug"
+                sh "helm upgrade --install wanderlast ."
             }
         }
     }
