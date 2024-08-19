@@ -39,9 +39,9 @@ pipeline {
             steps{
                 sh "helm ls"
                 sh "kubectl get nodes"
-                sh "cd Helm && pwd && ls -alh"
+                sh "cd /var/lib/jenkins/workspace/test/Helm"
+                sh "ls -l /var/lib/jenkins/workspace/test/Helm/Chart.yaml"
                 sh "helm upgrade --install wanderlast . --dry-run --debug"
-                sh "helm upgrade --install wanderlast ."
             }
         }
     }
