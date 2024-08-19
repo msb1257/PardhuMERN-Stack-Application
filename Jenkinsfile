@@ -19,7 +19,7 @@ pipeline {
         stage("SonarQube Code Analysis") {
             steps {
                 withSonarQubeEnv("Sonar") {
-                    sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=airbyte -Dsonar.projectKey=airbyte"
+                    sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=mern-stack -Dsonar.projectKey=mern-stack"
                 }
             }
         }
@@ -41,7 +41,8 @@ pipeline {
                 sh "kubectl get nodes"
                 sh "cd /var/lib/jenkins/workspace/test/Helm"
                 sh "ls -l /var/lib/jenkins/workspace/test/Helm/Chart.yaml"
-                sh "helm upgrade --install wanderlast /var/lib/jenkins/workspace/test/Helm --dry-run --debug"
+                sh "helm upgrade --install mern-stack /var/lib/jenkins/workspace/test/Helm --dry-run --debug"
+                sh "helm upgrade --install mern-stack /var/lib/jenkins/workspace/test/Helm"
             }
         }
     }
