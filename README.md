@@ -55,22 +55,6 @@ As an open source project, we encourage anyone to work on and contribute to the 
    npm run dev
    ```
 
-# DevOps Automation and Deployment LABs
-
-## LAB-1: Understanding Virtualization and Deploying on AWS
-In this lab, we will delve into the concept of virtualization and deploy our three-tier project on Amazon Web Services (AWS). You will gain hands-on experience with setting up virtualized environments and deploying applications in the cloud.
-
-1. Launch an EC2 instance and connect via ssh
-2. Make sure to enable SG frontend '5173' backend '5000'
-3. Update the system
-```bash
-sudo apt-get update -y
-```
-4. Since it's a private repo, we need a Personal access token to clone the repo and then clone the git repository
-```bash
-git clone https://github.com/amigo-nishant/Capstone-Project-LAB.git
-```
-
 ## Setting up the Backend with DB
 
 7. Install mongodb database
@@ -104,34 +88,7 @@ cp .env.sample .env
 ```bash
 npm start
 ```
-
-## Setting up the Frontend
-
-1. Open a New Terminal
-```bash
-cd frontend
-```
-2. Install Dependencies
-```bash
-npm i
-```
-3. vim .env.sample
-```bash
-change localhost:5000 --> public-IP:5000
-```
-4. Configure Environment Variables
-```bash
-cp .env.sample .env.local
-```
-5. Start your service 
-```bash
-npm run dev -- --host
-```
-> Now you can navigate to your frontend --> public-IP:5173
-> Frontend / Backend / MongoDB should be connected and deployed on AWS using Virtualization
-## LAB-2: Understanding Dockerization and Deployment with Docker Compose on EC2 instance
-This lab focuses on Dockerization, where you will learn how to containerize applications using Docker and deploy them using Docker Compose. You'll understand the benefits of containerization and how to manage multi-container applications efficiently.
-
+********************************************   **LAB-1**   ************************************************
 ### Setup Dockerfile for our backend 
 
 1. Install Docker -- https://docs.docker.com/engine/install/ubuntu/
@@ -199,6 +156,7 @@ docker ps
 docker rm -f <all-containers>
 ```
 > But containers are isolated, we have to create a network or we can use docker-compose so that we can have all the three containers in one single stack and communicate with each other.
+
 ### docker-compose 
 
 Run the command to start all the services
@@ -221,6 +179,7 @@ docker compose down
 > If you are building the image make sure to import the data
 > Check developer tools console log to identify the API calls and errors
 > Check the backend logs if it is connecting to mongo
+
 ## Deployment via custom kubernetes manifest files 
 1. Check the cluster configs and install minikube cluster using the shell script
 ```bash
@@ -303,6 +262,203 @@ http://PublicIP:NodePort
 ```bash
 helm uninstall wanderlast .
 ```
+
+********************************************   **LAB-2**   ************************************************
+# DevSecOps Project
+### Tools Covered:
+-  Linux
+-  Git and GitHub
+-  Docker
+-  Kubernetes
+-  Docker-compose
+-  Jenkins CI/CD
+-  SonarQube Scan
+-  SonarQube Quality Gates
+-  Trivy
+-  Prometheus & Grafana
+
+## Pre-requisites to implement this project:
+
+-  AWS EC2 instance (Ubuntu) with instance type t2.large and root volume 29GB.
+
+-  Installation of JAVA
+   ```bash
+   sudo apt update
+   sudo apt install fontconfig openjdk-17-jre
+   java -version
+   ```
+
+-  Installation of Jenkins
+   ```bash
+   sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+   https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+   echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+   https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+   /etc/apt/sources.list.d/jenkins.list > /dev/null
+   sudo apt-get update
+   sudo apt-get install jenkins
+   ```
+-  Setup Jenkins
+   ```bash
+   Public-IP:8080 (Jenkins running)
+   sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+   ```
+-  Docker, docker-compose, kubectl, helm  installled - Trigger the cluster.sh script with execute permission
+    ```bash
+   ./cluster.sh && chmod +x cluster.sh
+   ls -lah
+    ```
+- Install trivy --> https://aquasecurity.github.io/trivy/v0.18.3/installation/
+
+- SonarQube Server installed
+   ```bash
+    docker run -itd --name sonarqube-server -p 9000:9000 sonarqube:lts-community
+   ```
+#
+## Steps for Jenkins CI/CD:
+
+1)  Access Jenkins UI and setup Jenkins
+
+![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/1eec417e-95ab-4497-ad31-443ecd6b999e)
+
+#
+
+2)  Plugins Installation:
+
+    - Go to <b><i><u>Manage Jenkins</u></i></b>, click on <b><i><u>Plugins</u></i></b> and install all the plugins listed below, we will require for other tools integration:
+
+        - SonarQube Scanner (Version2.16.1)
+        - Sonar Quality Gates (Version1.3.1)
+        - Docker (Version1.5)
+        - Kubernetes
+#
+
+3) Go to SonarQube Server and create token
+
+    - Click on <b><i><u> Administration </u></i></b> tab, then <b><i><u> Security </u></i></b>, then <b><i><u> Users </u></i></b> and create Token.
+    -  Create a webhook to notify Jenkins that Quality gates scanning is done. (We will need this step later)
+
+        - Go to SonarQube Server, then <b><i><u> Administration </u></i></b>, then <b><i><u> Configuration </u></i></b> and click on <b><i><u> Webhook </u></i></b>, add webhook in below <b>Format</b>:
+        > http://<jenkins_url>:8080/sonarqube-webhook/
+        
+        Example: 
+
+        ```bash
+            http://34.207.58.19:8080/sonarqube-webhook/
+        ```
+
+        ![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/b9ef2301-b8ff-46f4-a457-6345d5e2dab6)
+
+
+        ![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/08a33164-f6a6-4c5d-8a34-7091cf8a5745)
+
+#
+
+4) Go to Jenkins UI <b><i><u> Manage Jenkins </u></i></b>, then <b><i><u> Credentials </u></i></b> and add SonarQube Credentials.
+
+![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/f6db72ec-7d8c-4f4c-ae7a-55d99dd20ce9)
+
+#
+
+5) Now, It's time to integrate SonarQube Server with Jenkins, go to <b><i><u> Manage Jenkins </u></i></b>, then <b><i><u> System </u></i></b> and look for <b><i><u> SonarQube Servers </u></i></b> and add SonarQube.
+
+![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/54849cb2-fe56-4acd-972d-3057a0eb3deb)
+
+#
+
+6) Go to <b><i><u> Manage Jenkins </u></i></b>, then <b><i><u> tools </u></i></b>, look for <b><i><u> SonarQube Scanner installations </u></i></b> and add SonarQube Scanner.
+
+> Note: Add name as ```Sonar```
+![image](https://github.com/DevMadhup/node-todo-cicd/assets/121779953/1fe926f6-a844-42d4-bce4-62193dde6640)
+
+#
+
+### Configure the Jenkins Job test 
+- create a jenkins job "test"
+- select pipeline
+- Pipeline -> SCM --> credentials --> Username and PAT --> Secret name "jenkins-secret"
+- ALso before triggering the build check make sure to give jenkins and docker permission 
+ ```bash
+sudo usermod -aG docker jenkins
+sudo systemctl restart docker
+sudo systemctl restart jenkins
+docker ps -a
+docker start <sonarqube-container-ID>
+minikube status
+minikube start
+kubectl get nodes
+```
+
+### Configure the Jenkins and K8s integration
+- We need to create a seperate namespace and create token for our cluster configuration with Jenkins scope
+```bash
+kubectl create namespace jenkin
+kubectl create sa jenkins -n jenkins
+kubectl create token jenkins -n jenkins --duration=8760h
+kubectl create rolebinding jenkins-admin-binding --clusterrole=admin --serviceaccount=jenkins:jenkins --namespace=jenkins
+```
+- Now we need to setup the credential in Jenkins so that cluster can communicate with our Jenkins Agent for the builds
+```bash
+kubectl config view
+```
+   1. Go to manage jenkins and select cloud --> "kubernetes"
+   2. Get the server URL from the above command
+   3. Disable http certificate
+   4. Type as "secret text" --> add the credential name as "jenkins"
+   5. Lastly add the token we created --> Test the connection
+
+### Configure the Jenkins user permission to run the job
+- change the default password for jenkins user --> "admin123"
+```bash
+sudo su
+usermod -a -G sudo jenkins
+passwd jenkins
+```
+- Move the kubeconfig file from ubuntu user to jenkins user
+```bash
+sudo su - jenkins
+mkdir -p $HOME/.kube
+sudo cp /home/ubuntu/.minikube/profiles/minikube/client.crt /var/lib/jenkins/.kube/
+sudo cp /home/ubuntu/.minikube/profiles/minikube/client.key /var/lib/jenkins/.kube/
+sudo cp /home/ubuntu/.minikube/ca.crt /var/lib/jenkins/.kube/
+```
+- change the path for the kubeconfig file from ubuntu user to jenkins user
+``` bash
+sudo vi /var/lib/jenkins/.kube/config
+```
+- We need to change here the config file path for **client-certificate** **client-key** & **certificate-authority**
+```bash
+users:
+   - name: minikube
+    user:
+       client-certificate: /var/lib/jenkins/.kube/client.crt.     —> change it
+       client-key: /var/lib/jenkins/.kube/client.key              —> change it
+    clusters:
+   - cluster:
+       certificate-authority: /var/lib/jenkins/.kube/ca.crt     —> change it
+```
+- change the permission for the kubeconfig file from ubuntu user to jenkins user along with the prmission
+```bash
+sudo chown jenkins:jenkins /var/lib/jenkins/.kube/client.crt
+sudo chown jenkins:jenkins /var/lib/jenkins/.kube/client.key
+sudo chown jenkins:jenkins /var/lib/jenkins/.kube/ca.crt
+sudo chmod 600 /var/lib/jenkins/.kube/client.crt
+sudo chmod 600 /var/lib/jenkins/.kube/client.key
+sudo chmod 600 /var/lib/jenkins/.kube/ca.crt
+```
+
+- Change the permission for kubernetes config file to run as curent user - jenkins user
+```bash
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+- Test as a jenkins user:
+```bash
+kubectl get nodes
+```
+
+- Deploy the App
+
 ## Observability Setup and Monitoring
 1. Add the prometheus community maintained helm chart
 ```bash
@@ -385,3 +541,4 @@ helm uninstall grafana grafana/grafana
 ```bash
 helm uninstall prometheus prometheus-community/prometheus
 ```
+4. Delete the Instance 
