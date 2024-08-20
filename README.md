@@ -88,7 +88,7 @@ cp .env.sample .env
 ```bash
 npm start
 ```
-*********************************************************   **LAB-1**   *****************************************************************
+*************************************   **LAB-1**   ***************************************
 ### Setup Dockerfile for our backend 
 
 1. Install Docker -- https://docs.docker.com/engine/install/ubuntu/
