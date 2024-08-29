@@ -421,6 +421,7 @@ mkdir -p $HOME/.kube
 sudo cp /home/ubuntu/.minikube/profiles/minikube/client.crt /var/lib/jenkins/.kube/
 sudo cp /home/ubuntu/.minikube/profiles/minikube/client.key /var/lib/jenkins/.kube/
 sudo cp /home/ubuntu/.minikube/ca.crt /var/lib/jenkins/.kube/
+sudo cp /home/ubuntu/.kube/config /var/lib/jenkins/.kube
 ```
 - change the path for the kubeconfig file from ubuntu user to jenkins user
 ``` bash
@@ -431,7 +432,7 @@ sudo vi /var/lib/jenkins/.kube/config
 users:
    - name: minikube
     user:
-       client-certificate: /var/lib/jenkins/.kube/client.crt.     —> change it
+       client-certificate: /var/lib/jenkins/.kube/client.crt      —> change it
        client-key: /var/lib/jenkins/.kube/client.key              —> change it
     clusters:
    - cluster:
@@ -442,9 +443,11 @@ users:
 sudo chown jenkins:jenkins /var/lib/jenkins/.kube/client.crt
 sudo chown jenkins:jenkins /var/lib/jenkins/.kube/client.key
 sudo chown jenkins:jenkins /var/lib/jenkins/.kube/ca.crt
+sudo chown jenkins:jenkins /var/lib/jenkins/.kube/config
 sudo chmod 600 /var/lib/jenkins/.kube/client.crt
 sudo chmod 600 /var/lib/jenkins/.kube/client.key
 sudo chmod 600 /var/lib/jenkins/.kube/ca.crt
+sudo chmod 600 /var/lib/jenkins/.kube/config
 ```
 
 - Change the permission for kubernetes config file to run as curent user - jenkins user
