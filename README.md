@@ -392,7 +392,7 @@ kubectl get nodes
 ### Configure the Jenkins and K8s integration
 - We need to create a seperate namespace and create token for our cluster configuration with Jenkins scope
 ```bash
-kubectl create namespace jenkin
+kubectl create namespace jenkins
 kubectl create sa jenkins -n jenkins
 kubectl create token jenkins -n jenkins --duration=8760h
 kubectl create rolebinding jenkins-admin-binding --clusterrole=admin --serviceaccount=jenkins:jenkins --namespace=jenkins
