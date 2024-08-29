@@ -460,7 +460,23 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl get nodes
 ```
 
-- Deploy the App
+- Get the URL for the service running in minikube VM
+```bash
+minikube service wanderlast-helm-frontend --url
+```
+- Test the app locally on minikube VM
+```bash
+curl <URL>
+```
+- Now to test the application outside the cluster via port-forwarding
+```bash
+kubectl get svc
+kubectl port-forward svc/wanderlast-helm-frontend NodePort-port:5173 --address 0.0.0.0 &
+```
+- Now to test on browser 
+```bash
+http://PublicIP:NodePort
+```
 
 ## Observability Setup and Monitoring
 1. Add the prometheus community maintained helm chart
