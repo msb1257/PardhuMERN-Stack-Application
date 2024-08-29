@@ -462,7 +462,7 @@ kubectl get nodes
 
 - Get the URL for the service running in minikube VM
 ```bash
-minikube service wanderlast-helm-frontend --url
+minikube service mern-stack-helm-frontend --url
 ```
 - Test the app locally on minikube VM
 ```bash
@@ -471,7 +471,7 @@ curl <URL>
 - Now to test the application outside the cluster via port-forwarding
 ```bash
 kubectl get svc
-kubectl port-forward svc/wanderlast-helm-frontend NodePort-port:5173 --address 0.0.0.0 &
+kubectl port-forward svc/mern-stack-helm-frontend NodePort-port:5173 --address 0.0.0.0 &
 ```
 - Now to test on browser 
 ```bash
