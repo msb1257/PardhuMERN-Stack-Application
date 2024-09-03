@@ -281,7 +281,7 @@ helm uninstall wanderlast .
 
 -  AWS EC2 instance (Ubuntu) with instance type t2.large and root volume 29GB.
 
--  Install Docker,K8s,helm usinfg the cluster.sh script
+-  Install Docke, K8s, helm using the cluster.sh script
 
 -  sudo usermod -aG docker $USER && newgrp docker
 
