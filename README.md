@@ -472,10 +472,14 @@ minikube service mern-stack-helm-frontend --url
 ```bash
 curl <URL>
 ```
+- Expose the App
+```bash
+kubectl expose service mern-stack-helm-frontend --type=NodePort --target-port=5173 --name=mern-stack-helm-frontend-ext
+```
 - Now to test the application outside the cluster via port-forwarding
 ```bash
 kubectl get svc
-kubectl port-forward svc/mern-stack-helm-frontend NodePort-port:5173 --address 0.0.0.0 &
+kubectl port-forward svc/mern-stack-helm-frontend-ext NodePort-port:5173 --address 0.0.0.0 &
 ```
 - Now to test on browser 
 ```bash
