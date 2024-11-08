@@ -42,7 +42,7 @@ pipeline {
                 sh "cd /var/lib/jenkins/workspace/test/Helm"
                 sh "ls -l /var/lib/jenkins/workspace/test/Helm/Chart.yaml"
                 sh "helm upgrade --install mern-stack /var/lib/jenkins/workspace/test/Helm --dry-run --debug"
-                sh "helm upgrade --install mern-stack /var/lib/jenkins/workspace/test/Helm"
+                sh "helm upgrade --install mern-stack /var/lib/jenkins/workspace/PROD/Helm"
             }
         }
     }
