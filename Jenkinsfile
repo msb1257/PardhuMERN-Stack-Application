@@ -39,9 +39,9 @@ pipeline {
             steps{
                 sh "helm ls"
                 sh "kubectl get nodes"
-                sh "cd /var/lib/jenkins/workspace/test/Helm"
-                sh "ls -l /var/lib/jenkins/workspace/test/Helm/Chart.yaml"
-                sh "helm upgrade --install mern-stack /var/lib/jenkins/workspace/test/Helm --dry-run --debug"
+                sh "cd /var/lib/jenkins/workspace/PROD/Helm"
+                sh "ls -l /var/lib/jenkins/workspace/PROD/Helm/Chart.yaml"
+                sh "helm upgrade --install mern-stack /var/lib/jenkins/workspace/PROD/Helm --dry-run --debug"
                 sh "helm upgrade --install mern-stack /var/lib/jenkins/workspace/PROD/Helm"
             }
         }
