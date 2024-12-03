@@ -91,17 +91,16 @@ WanderLust is a MERN travel blog website ✈ This project is aimed to learn DevO
     
 2.  **Clone the Repository**
     
-   ``` bash
-    
+    ``` bash
     git clone https://github.com/{your-username}/wanderlust.git
-   ``` 
+    ``` 
 3.  **Navigate to the Project Directory**
+     
+     ```bash
     
-    ```bash
+     cd wanderlust
     
-    cd wanderlust
-    
-    ```
+     ```
 4.  **Update Environment Variables**  - If you anticipate the IP address of the instance might change, update the `.env.sample` file with the new IP address.
 
 5.  **Run Docker Compose**
@@ -111,3 +110,8 @@ WanderLust is a MERN travel blog website ✈ This project is aimed to learn DevO
     docker-compose up
     ```
     This command will build the Docker images and start the containers for the backend and frontend, enabling you to access the Wanderlust application.
+
+6.  Extract data from the sample command
+    ```bash
+    docker exec -it mongo mongoimport --db wanderlust --collection posts --file ./data/sample_posts.json --jsonArray
+    ```
