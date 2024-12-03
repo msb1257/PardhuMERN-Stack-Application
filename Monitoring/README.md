@@ -17,6 +17,15 @@ Monitoring is the process of keeping an eye on these metrics over time to unders
 
 ![prometheus-architecture](https://github.com/user-attachments/assets/6ef039e0-ee11-4fda-a153-b9b52244df4a)
 
+### 🖥️ Prometheus Web UI
+- The Prometheus Web UI allows users to explore the collected metrics data, run ad-hoc PromQL queries, and visualize the results directly within Prometheus.
+
+### 📊 Grafana
+- Grafana is a powerful dashboard and visualization tool that integrates with Prometheus to provide rich, customizable visualizations of the metrics data.
+
+### 🔌 API Clients
+- API clients interact with Prometheus through its HTTP API to fetch data, query metrics, and integrate Prometheus with other systems or custom applications.
+
 # 🛠️  Installation & Configurations
 ### 📦 Step 1: Create Minikube Cluster - enable Minikube VM 
 
