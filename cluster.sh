@@ -50,5 +50,8 @@ source ~/.bashrc
 # Verify kubectl version
 kubectl version --client
 
+# Add docker as a group 
+sudo usermod -aG docker $USER && newgrp docker
+
 # Start Minikube
 # minikube start
