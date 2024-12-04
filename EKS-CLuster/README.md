@@ -21,6 +21,8 @@ aws configure list
 4. Navigate to the directory where terrafrom config files are available and initialize terraform, this will intialize the terraform environment for you and download the modules, providers and other configuration required.
 ```bash
 terraform init
+terraform plan
+terraform apply
 ```
 
 5. Configure access entry for the current role
