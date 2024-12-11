@@ -12,7 +12,7 @@ This Helm chart provides a simple way to deploy a three-tier application consist
 
 - Kubernetes cluster 
 - Helm 3.x
-- PersistentVolume (for the database, if required)
+- docker
 
 ## Installation
 
