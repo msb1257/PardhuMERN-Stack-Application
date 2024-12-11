@@ -35,7 +35,7 @@ terraform apply
 
 7. Once the cluster is up, you can configure kubectl to interact with it by using the aws eks update-kubeconfig command. Here's the command to set up the kubeconfig file:
 ```bash
-aws eks --region ap-south-1 update-kubeconfig --name mern-cluster
+aws eks --region us-east-1 update-kubeconfig --name education-eks-<some-string>
 ```
 
 8. Verify resources
