@@ -10,7 +10,7 @@ This Helm chart provides a simple way to deploy a three-tier application consist
 
 ## Prerequisites
 
-- Kubernetes cluster (1.20+ recommended)
+- Kubernetes cluster 
 - Helm 3.x
 - PersistentVolume (for the database, if required)
 
