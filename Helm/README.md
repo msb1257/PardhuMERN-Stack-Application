@@ -1,5 +1,3 @@
-# Deploying Services via Helm CHarts 
-
 # Helm Chart for Three-Tier Application
 
 This Helm chart provides a simple way to deploy a three-tier application consisting of a frontend, backend, and database. It is designed to be modular, allowing customization for various application needs.
