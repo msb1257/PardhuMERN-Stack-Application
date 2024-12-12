@@ -77,8 +77,20 @@ kubectl port-forward service/grafana-ext 32124:3000 --address 0.0.0.0 &
 ### ✅ Step 7: Setup Dashboards
 1. Go to Dashboards
 2. Click "import"
-3. Dashboard ID - 15661
-4. There are many dashboards already available we can import as required by the datasources
+3. Dashboard ID - 15661 --> Kubernetes for Prometheus dashboard
+```bash
+https://grafana.com/grafana/dashboards/15661-1-k8s-for-prometheus-dashboard-20211010/
+```
+4. Dashboard ID - 8171 --> Monitor nodes
+```bash
+https://grafana.com/grafana/dashboards/8171-kubernetes-nodes/
+```
+5. Dashboard ID - 3662 --> Prometheus 2.0
+```bash
+https://grafana.com/grafana/dashboards/3662-prometheus-2-0-overview/
+```
+
+6. There are many dashboards already available we can import as required by the datasources
 
 ```bash
 https://grafana.com/grafana/dashboards/?search=prometheus
